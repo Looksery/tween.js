@@ -915,3 +915,10 @@ TWEEN.Interpolation = {
 	}
 
 })(this);
+
+
+//------------------------auto-update-----------------------------------
+var updateTweenEvent = script.createEvent("UpdateEvent");
+updateTweenEvent.bind(function () {
+    TWEEN.update();
+});
