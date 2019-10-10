@@ -987,4 +987,3 @@ var updateTweenEvent = script.createEvent("UpdateEvent");
 updateTweenEvent.bind(function () {
     TWEEN.update();
 });
-export default TWEEN;
