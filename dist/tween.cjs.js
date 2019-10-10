@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  * Tween.js - Licensed under the MIT license
  * https://github.com/tweenjs/tween.js
@@ -957,34 +959,5 @@ TWEEN.Interpolation = {
 	}
 
 };
-// UMD (Universal Module Definition)
-(function (root) {
 
-	if (typeof define === 'function' && define.amd) {
-
-		// AMD
-		define([], function () {
-			return TWEEN;
-		});
-
-	} else if (typeof module !== 'undefined' && typeof exports === 'object') {
-
-		// Node.js
-		module.exports = TWEEN;
-
-	} else if (root !== undefined) {
-
-		// Global variable
-		root.TWEEN = TWEEN;
-
-	}
-
-})(this);
-
-
-//------------------------auto-update-----------------------------------
-var updateTweenEvent = script.createEvent("UpdateEvent");
-updateTweenEvent.bind(function () {
-    TWEEN.update();
-});
-export default TWEEN;
+module.exports = TWEEN;

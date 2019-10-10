@@ -8,8 +8,14 @@ JavaScript tweening engine for easy animations, incorporating optimised Robert P
 [![Flattr this][flattr-image]][flattr-url]
 [![CDNJS][cdnjs-image]][cdnjs-url]
 
+Do you use tween.js? If you have some time, please fill out [this short survey](https://docs.google.com/forms/d/e/1FAIpQLScJ0xnsS1m4mdXGRmGFPVd_CYi0Ah224lLYc4UP-fmakQjNHw/viewform?usp=sf_link).
+
+**Update Note** In v18 the script you should include has moved from `src/Tween.js` to `dist/tween.umd.js`. See the [installation section](#Installation) below. v18 is not yet available on CDNJS.
+
+---
+
 ```javascript
-var box = document.createElement('div');
+const box = document.createElement('div');
 box.style.setProperty('background-color', '#008800');
 box.style.setProperty('width', '100px');
 box.style.setProperty('height', '100px');
@@ -22,13 +28,13 @@ function animate(time) {
 }
 requestAnimationFrame(animate);
 
-var coords = { x: 0, y: 0 }; // Start at (0, 0)
-var tween = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'.
+const coords = { x: 0, y: 0 }; // Start at (0, 0)
+const tween = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'.
         .to({ x: 300, y: 200 }, 1000) // Move to (300, 200) in 1 second.
         .easing(TWEEN.Easing.Quadratic.Out) // Use an easing function to make the animation smooth.
-        .onUpdate(function() { // Called after tween.js updates 'coords'.
+        .onUpdate(() => { // Called after tween.js updates 'coords'.
             // Move 'box' to the position described by 'coords' with a CSS translation.
-            box.style.setProperty('transform', 'translate(' + coords.x + 'px, ' + coords.y + 'px)');
+            box.style.setProperty('transform', `translate(${coords.x}px, ${coords.y}px)`);
         })
         .start(); // Start the tween immediately.
 ```
@@ -37,59 +43,41 @@ var tween = new TWEEN.Tween(coords) // Create a new tween that modifies 'coords'
 
 ## Installation
 
-Download the [library](https://raw.githubusercontent.com/tweenjs/tween.js/master/src/Tween.js) and include it in your code:
-
-```html
-<script src="js/Tween.js"></script>
-```
-
-You can also reference a CDN-hosted version in your code, thanks to cdnjs. For example:
-
-```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/16.3.5/Tween.min.js"></script>
-```
-
-See [tween.js](https://cdnjs.com/libraries/tween.js/) for more versions.
-
-### More advanced users might want to...
-
-#### Use `npm`
+Currently npm is required to build the project.
 
 ```bash
-npm install @tweenjs/tween.js
+git clone https://github.com/tweenjs/tween.js
+cd tween.js
+npm i .
+npm run build
 ```
 
-Then include the Tween.js module with the standard node.js `require`:
+This will create some builds in the `dist` directory. There are currently four different builds of the library:
+
+ - UMD : tween.umd.js
+ - AMD : tween.amd.js
+ - CommonJS : tween.cjs.js
+ - ES6 Module : tween.es.js
+
+You are now able to copy tween.umd.js into your project, then include it with
+a script tag. This will add TWEEN to the global scope.
+
+```html
+<script src="js/tween.umd.js"></script>
+```
+
+### With `require('@tweenjs/tween.js')`
+
+You can add tween.js as an npm dependency:
+
+```bash
+npm i @tweenjs/tween.js@^18
+```
+
+If you are using Node, Webpack, or Browserify, then you can now use the following to include tween.js:
 
 ```javascript
-var TWEEN = require('@tweenjs/tween.js');
-```
-
-And you can use Tween.js as in all other examples--for example:
-
-```javascript
-var t = new TWEEN.Tween( /* etc */ );
-t.start();
-```
-
-You will need to use a tool such as `browserify` to convert code using this style into something that can be run in the browser (browsers don't know about `require`).
-
-#### Use `bower`
-
-```bash
-bower install @tweenjs/tweenjs --save
-```
-
-or install an specific tag. They are git tags, and you can run `git tag` in the command line for a list if you have cloned the repository locally, or you can also check out the list in the [tween.js tags page](https://github.com/tweenjs/tween.js/tags). For example, to install `v16.3.0`:
-
-```bash
-bower install @tweenjs/tweenjs#v16.3.0
-```
-
-Then reference the library source:
-
-```html
-<script src="bower_components/@tweenjs/tweenjs/src/Tween.js"></script>
+const TWEEN = require('@tweenjs/tween.js');
 ```
 
 ## Features
