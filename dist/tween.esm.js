@@ -1,3 +1,5 @@
+var version = '18.4.2';
+
 /**
  * Tween.js - Licensed under the MIT license
  * https://github.com/tweenjs/tween.js
@@ -957,5 +959,6 @@ TWEEN.Interpolation = {
 	}
 
 };
+TWEEN.version = version;
 
 export default TWEEN;
